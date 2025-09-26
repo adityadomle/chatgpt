@@ -14,13 +14,13 @@ async function registerUser(req, res) {
         }
 
         // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashPassword = await bcrypt.hash(password, 10);
 
         // Create new user
         const user = await userModel.create({
             fullName: { firstName, lastName },
             email,
-            password: hashedPassword
+            password: hashPassword
         });
 
         // Create JWT token
@@ -41,6 +41,7 @@ async function registerUser(req, res) {
 
     } catch (error) {
         res.status(500).json({ message: "Something went wrong", error: error.message });
+        
     }
 }
 
